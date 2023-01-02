@@ -1,0 +1,29 @@
+---
+title: "Data Structuration and Transportation - introduction"
+author: "Pierre Formont"
+format: revealjs
+---
+
+## Who am I ?
+
+- 2006 - 2009: Engineering school - signal and image processing (ENSE3)
+- 2009 - 2013: PhD in classification for radar imagery
+- 2014 - 2017: Data Scientist @ Datapole
+- 2017 - 2022: Data Scientist / Data Engineer @ Ogury
+- 2022 - now: Lead Data Engineer @ Echo Analytics
+
+## Syllabus
+
+1. Why data structuration ?
+2. Common data formats
+3. Data transportation and storage systems:
+  - APIs
+  - Storage systems
+  - Databases
+
+## Tools
+
+- Python
+- Github
+- APIs
+- Airflow

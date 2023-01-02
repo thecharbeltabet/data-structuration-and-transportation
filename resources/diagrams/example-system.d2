@@ -1,0 +1,29 @@
+customer: Customer
+customer.shape: person
+
+single-page-application: Web Application
+mobile-application: Mobile Application
+
+backend: {
+  label: Applications backend
+  api: API
+  db: Database
+  db.shape: cylinder
+}
+
+other-systems: {
+  label: Other Systems
+  analytics: Analytics
+  notification-system: Notification System
+  notification-system.shape: queue
+}
+
+customer <-> single-page-application
+customer <-> mobile-application
+
+single-page-application <-> backend.api
+mobile-application <-> backend.api
+
+backend.api <-> backend.db
+backend.api -> other-systems.notification-system
+backend.api -> other-systems.analytics

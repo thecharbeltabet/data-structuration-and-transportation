@@ -1,0 +1,184 @@
+---
+title: "Data Structuration"
+author: "Pierre Formont"
+format: 
+  revealjs:
+    highlight-style: a11y
+    smaller: true
+    code-block-background: true
+    code-block-border-left: true
+---
+
+## Agenda
+
+1. Context and goals
+2. Common data formats
+3. Work with `csv` and `json`
+
+## Why data structuration
+
+- Any application produces and/or consumes data
+- Other applications may depend on this data
+- Easier and more **efficient** with a well-defined data structure
+
+## An example system with interconnected components
+
+![](resources/diagrams/example-system.svg)
+
+## Common data formats
+
+::: {.incremental}
+- Plain text (_e.g._ `json`, `yaml`)
+- Fixed-length buffers
+- Delimiter-based buffers (_e.g._ `csv`)
+- Markup-based buffers (_e.g._ `xml`)
+:::
+
+## Plain text files
+
+```
+January
+February
+March
+April
+May
+June
+July
+August
+September
+October
+November
+December
+```
+
+**Exercise 1**
+
+>  Read the `months.txt` file and store it into a list of strings
+
+## Exercise 1
+
+```{python}
+#| code-fold: true
+#| echo: true
+with open("resources/plain/months.txt", "r") as f:
+  lines = [line.rstrip() for line in f.readlines()]
+
+print(lines)
+``` 
+
+## Fixed-length buffers
+
+```
+0001Pierre                    Paris                         EPITA                         
+```
+
+Each element of the buffer has a fixed length.
+
+[0001]{style="color:#E14D2A;"}[Pierre....................]{style="color:#FD841F;"}[Paris.........................]{style="color:#3E6D9C;"}[EPITA.........................]{style="color:#001253;"}
+
+- [0-3: id]{style="color:#E14D2A;"}
+- [4-30: name]{style="color:#FD841F;"}
+- [31-60: city]{style="color:#3E6D9C;"}
+- [61-90: school]{style="color:#001253;"}
+
+We can split the buffer and extract each part with knowledge of the schema.
+
+**Exercise 2**
+
+>  Read the `users.txt` file and store it into a list of class instances
+
+## Exercise 2
+
+```{python}
+#| code-fold: true
+#| echo: true
+FILE_PATH = "resources/fixed-length/users.txt" 
+
+### Plain Python
+
+class User:
+  def __init__(self, id: int, name: str, city: str, school: str) -> None:
+    self.id = id
+    self.name = name
+    self.city = city
+    self.school = school
+
+  def __repr__(self) -> str:
+    return f"[{self.id}] {self.name} at {self.school} in {self.city}"
+
+def parse_user(line: str) -> User:
+  id = int(line[0:4])
+  name = line[4:30].rstrip()
+  city = line[30:60].rstrip()
+  school = line[60:90].rstrip()
+  return User(id, name, city, school)
+
+with open(FILE_PATH, "r") as f:
+  users = [parse_user(line) for line in f.readlines()]
+
+for user in users:
+  print(user)
+```
+
+## CSV format (1/2)
+
+The CSV (Comma-Separated Values) format has been in use for a very long time (since the 1970's !)
+
+It is ubiquitous in tech:
+
+- many databases can import/export from/to CSV
+- many Unix commands (`cut`, `awk`, etc.) can split on commas -> basic CSV handling
+- many text editors and IDEs offer some support for CSV
+
+**But also outside of tech**: spreadsheets (Excel, Libreoffice, etc.) are, functionally, CSV files*
+
+<br/>
+<br/>
+<br/>
+<br/>
+* disclaimer: `.xslx` files are not actually CSV files
+
+## CSV format (2/2)
+
+```.{plain}
+id,name,city,school
+0001,Pierre,Paris,EPITA
+0002,Ada,London,Home
+0003,Margaret,Boston,MIT
+```
+
+::: {.incremental}
+
+- No real standard but a set of conventions.
+- Each row is an individual record where values are separated by -- usually -- commas, hence the name.
+- The first row is usually a header containing the name of the fields.
+- Field values can be empty, _e.g._
+
+:::
+
+. . .
+
+```.{plain}
+id,name,city,age,school
+0001,Pierre,Paris,36,EPITA
+0002,Ada,London,,Home
+0003,Margaret,Boston,,MIT
+```
+
+
+
+## CSV exercises
+
+**Exercise 3**
+
+>  Read the `users.csv` file and store it into a list of class instances
+
+**Exercise 4**
+
+>  Read the `users.csv` file using the `csv` package and store it into a list of class instances
+
+**Exercise 5**
+
+>  Read the `ratp.csv` file using the `csv` package
+
+RATP data coming from their [open data datasets](https://data.ratp.fr/explore/dataset/trafic-annuel-entrant-par-station-du-reseau-ferre-2021/information/).
