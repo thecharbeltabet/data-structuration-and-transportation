@@ -18,7 +18,7 @@ format:
 pyenv install 3.10.9
 ```
 
-- Fork the [`data-structuration-and-transportation`](https://github.com/Tutuchan/data-structuration-and-transportation) repository and clone it
+- Fork the [`data-structuration-and-transportation`](https://github.com/Tutuchan/data-structuration-and-transportation/fork) repository and clone it
 
 ```.{bash}
 git clone https://github.com/<your-github-username>/data-structuration-and-transportation.git
@@ -34,4 +34,5 @@ pyenv local 3.10.9
 
 ```.{bash}
 python -m venv venv
+source -m venv/bin/activate
 ```
