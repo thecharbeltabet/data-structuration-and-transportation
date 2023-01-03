@@ -4,32 +4,41 @@ This is the repository for the EPITA course on `Data Structuration and Transport
 
 ## Usage
 
-### For students
+### Prerequisites
 
-#### Prerequisites
+#### Install pyenv
 
-1. Install [pyenv](https://github.com/pyenv/pyenv#installation)
-2. Install Python 3.10.9 using pyenv
+- For Mac / Linux users:
+  - Install [`pyenv`](https://github.com/pyenv/pyenv#installation)
+- For Windows users:
+  - **Preferred**: install [`pyenv`](https://github.com/pyenv/pyenv#installation) using the Windows Subsystem for Linux
+  - Or install [`pyenv-win`](https://github.com/pyenv-win/pyenv-win):
+    - Run Powershell as an administrator
+    - If `pyenv` is not recognized, see [this page](https://github.com/pyenv-win/pyenv-win/blob/master/docs/installation.md#add-system-settings)
 
-```bash
+#### Install Python
+
+- Install Python 3.10 using pyenv
+
+```.{bash}
 pyenv install 3.10.9
+```
+
+- Fork the [`data-structuration-and-transportation`](https://github.com/Tutuchan/data-structuration-and-transportation/fork) repository and clone it
+
+```.{bash}
+git clone https://github.com/<your-github-username>/data-structuration-and-transportation.git
+```
+
+- Use Python 3.10 for this repository
+
+```.{bash}
 pyenv local 3.10.9
 ```
 
-3. Create a virtual environment
+- Create a virtual environment
 
-```bash
+```.{bash}
 python -m venv venv
-source venv/bin/activate
-```
-
-### For teachers
-
-#### Prerequisites
-
-1. Follow the prerequisites for students
-2. Install additional requirements
-
-```bash
-pip install -r requirements-dev.txt
+source -m venv/bin/activate
 ```
