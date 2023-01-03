@@ -159,8 +159,6 @@ RATP data coming from their [open data datasets](https://data.ratp.fr/explore/da
 
 A JSON document is a collection of key-value pairs, _e.g._
 
-. . .
-
 ```{.json}
 {
   "id": "0001",
@@ -171,6 +169,8 @@ A JSON document is a collection of key-value pairs, _e.g._
   "is_teacher": true
 }
 ```
+
+. . .
 
 Keys need to be in double-quotes and values can take one of several data types:
 
