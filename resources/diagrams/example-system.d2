@@ -21,9 +21,9 @@ other-systems: {
 customer <-> single-page-application
 customer <-> mobile-application
 
-single-page-application <-> backend.api
-mobile-application <-> backend.api
+single-page-application <-> backend.api: HTTPS / JSON
+mobile-application <-> backend.api: HTTPS / JSON
 
-backend.api <-> backend.db
-backend.api -> other-systems.notification-system
-backend.api -> other-systems.analytics
+backend.api <-> backend.db: Store / retrieve data
+backend.api -> other-systems.notification-system: HTTPS / JSON
+backend.api -> other-systems.analytics: HTTPS / JSON

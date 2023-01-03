@@ -7,6 +7,7 @@ format:
     smaller: true
     code-block-background: true
     code-block-border-left: true
+    code-line-numbers: true
 ---
 
 ## Agenda
@@ -21,9 +22,9 @@ format:
 - Other applications may depend on this data
 - Easier and more **efficient** with a well-defined data structure
 
-## An example system with interconnected components
+## Example system
 
-![](resources/diagrams/example-system.svg)
+![](resources/diagrams/example-system.png)
 
 ## Common data formats
 
@@ -36,7 +37,7 @@ format:
 
 ## Plain text files
 
-```
+```{.plain}
 January
 February
 March
@@ -55,20 +56,9 @@ December
 
 >  Read the `months.txt` file and store it into a list of strings
 
-## Exercise 1
-
-```{python}
-#| code-fold: true
-#| echo: true
-with open("resources/plain/months.txt", "r") as f:
-  lines = [line.rstrip() for line in f.readlines()]
-
-print(lines)
-``` 
-
 ## Fixed-length buffers
 
-```
+```{.plain}
 0001Pierre                    Paris                         EPITA                         
 ```
 
@@ -86,39 +76,6 @@ We can split the buffer and extract each part with knowledge of the schema.
 **Exercise 2**
 
 >  Read the `users.txt` file and store it into a list of class instances
-
-## Exercise 2
-
-```{python}
-#| code-fold: true
-#| echo: true
-FILE_PATH = "resources/fixed-length/users.txt" 
-
-### Plain Python
-
-class User:
-  def __init__(self, id: int, name: str, city: str, school: str) -> None:
-    self.id = id
-    self.name = name
-    self.city = city
-    self.school = school
-
-  def __repr__(self) -> str:
-    return f"[{self.id}] {self.name} at {self.school} in {self.city}"
-
-def parse_user(line: str) -> User:
-  id = int(line[0:4])
-  name = line[4:30].rstrip()
-  city = line[30:60].rstrip()
-  school = line[60:90].rstrip()
-  return User(id, name, city, school)
-
-with open(FILE_PATH, "r") as f:
-  users = [parse_user(line) for line in f.readlines()]
-
-for user in users:
-  print(user)
-```
 
 ## CSV format (1/2)
 
@@ -165,20 +122,115 @@ id,name,city,age,school
 0003,Margaret,Boston,,MIT
 ```
 
-
-
 ## CSV exercises
 
 **Exercise 3**
 
 >  Read the `users.csv` file and store it into a list of class instances
 
+. . .
+
 **Exercise 4**
 
 >  Read the `users.csv` file using the `csv` package and store it into a list of class instances
 
+. . .
+
 **Exercise 5**
 
->  Read the `ratp.csv` file using the `csv` package
+>  Read the `ratp.csv` file using the `csv` package and standardize the names
 
 RATP data coming from their [open data datasets](https://data.ratp.fr/explore/dataset/trafic-annuel-entrant-par-station-du-reseau-ferre-2021/information/).
+
+## JSON format (1/3)
+
+::: {.incremental}
+
+- JSON = **`J`**`ava`**`S`**`cript `**`O`**`bject `**`N`**`otation`
+- more recent but also ubiquitous data format
+- originated with Javascript but can be used in virtually every language
+- one of the -- if not **the** -- most used format to exchange data between services
+- used extensively in REST APIs (more on this topic later)
+- unlike CSV, supports data types
+
+:::
+
+## JSON format (2/3)
+
+A JSON document is a collection of key-value pairs, _e.g._
+
+. . .
+
+```{.json}
+{
+  "id": "0001",
+  "name": "Pierre",
+  "city": "Paris",
+  "school": "EPITA",
+  "age": 36,
+  "is_teacher": true
+}
+```
+
+Keys need to be in double-quotes and values can take one of several data types:
+
+::: {.incremental}
+
+- string: _e.g_ `"name": "Pierre"`
+- number: _e.g._ `"age": 36`
+- boolean: _e.g._ `"is_teacher": true`
+- object: a collection of `key-value` pairs inside curly brackets -- `{ }`. The example above is itself an object -> JSON allows nested objects
+- array: an ordered list of zero or more elements, each of which may be of any type, inside square brackets -- `[ ]`
+
+:::
+
+## JSON format (3/3)
+
+Can be written on one-line as well
+
+```{.json}
+{"id": "0001", "name": "Pierre", "city": "Paris", "school": "EPITA", "age": 36, "is_teacher": true}
+```
+
+. . .
+
+By standard, a JSON document must contain only one object at the top-level, or an array of objects, _e.g._ these two documents are valid:
+
+. . .
+
+```{.json}
+{
+  "id": "0001",
+  "name": "Pierre",
+  "city": "Paris",
+  "school": "EPITA",
+  "age": 36,
+  "is_teacher": true
+}
+```
+
+```{.json}
+[
+  {"id": "0001", "name": "Pierre", "city": "Paris", "school": "EPITA", "age": 36, "is_teacher": true},
+  {"id": "0002", "name": "Ada", "city": "London", "school": "Home", "age": 28, "is_teacher": false}
+]
+```
+
+. . .
+
+However, this one is invalid:
+
+```{.json}
+{"id": "0001", "name": "Pierre", "city": "Paris", "school": "EPITA", "age": 36, "is_teacher": true}
+{"id": "0002", "name": "Ada", "city": "London", "school": "Home", "age": 28, "is_teacher": false}
+```
+
+. . . 
+
+**Except** that there is a use case for this type of JSON documents -- called line-delimited JSON or JSONL: storing log files, so many libraries can actually read these documents.
+
+## JSON exercises
+
+**Exercise 6**
+
+>  Read the `users.json` file, store it into a list of class instances and compare them with the ones created from the CSV file.

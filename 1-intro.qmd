@@ -1,7 +1,9 @@
 ---
 title: "Data Structuration and Transportation - introduction"
 author: "Pierre Formont"
-format: revealjs
+format: 
+  revealjs:
+    incremental: true 
 ---
 
 ## Who am I ?
@@ -17,13 +19,13 @@ format: revealjs
 1. Why data structuration ?
 2. Common data formats
 3. Data transportation and storage systems:
-  - APIs
-  - Storage systems
-  - Databases
+    - APIs
+    - Storage systems
+    - Databases
 
 ## Tools
 
-- Python
 - Github
-- APIs
-- Airflow
+- Python
+- Docker
+- PostgreSQL

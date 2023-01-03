@@ -2,16 +2,21 @@
 title: "Setup"
 author: "Pierre Formont"
 format: 
-  revealjs:
-    highlight-style: a11y
-    smaller: true
-    code-block-background: true
-    code-block-border-left: true
+  revealjs
 ---
 
-## Setup
+## Install pyenv
 
-- Install [`pyenv`](https://github.com/pyenv/pyenv#installation)
+- For Mac / Linux users:
+    - Install [`pyenv`](https://github.com/pyenv/pyenv#installation)
+- For Windows users:
+    - **Preferred**: install [`pyenv`](https://github.com/pyenv/pyenv#installation) using the Windows Subsystem for Linux
+    - Or install [`pyenv-win`](https://github.com/pyenv-win/pyenv-win):
+        - Run Powershell as an administrator
+        - If `pyenv` is not recognized, see [this page](https://github.com/pyenv-win/pyenv-win/blob/master/docs/installation.md#add-system-settings)
+
+## Install Python 
+
 - Install Python 3.10 using pyenv
 
 ```.{bash}
