@@ -27,5 +27,5 @@ format:
 
 - Github
 - Python
+- sqlite / PostgreSQL
 - Docker
-- PostgreSQL
